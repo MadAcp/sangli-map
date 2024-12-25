@@ -9,12 +9,13 @@ const key = 'NrkwVsgcuyrvP4WtMKGT';
 const layerAttrb = "\u003ca href=\"https://www.maptiler.com/copyright/\" target=\"_blank\"\u003e\u0026copy; MapTiler\u003c/a\u003e \u003ca href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\"\u003e\u0026copy; OpenStreetMap contributors\u003c/a\u003e";
 
 const map = L.map('map').setView(center, zoomLevel);
-L.control.maptilerGeocoding({ apiKey: key }).addTo(map);
+//Search box
+//L.control.maptilerGeocoding({ apiKey: key }).addTo(map);
 
 const layer = L.tileLayer(`https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${key}`,{
     tileSize: 512,
     zoomOffset: -1,
-    minZoom: 1,
+    minZoom: zoomLevel,
     attribution: layerAttrb,
     crossOrigin: true
 }).addTo(map);
@@ -74,6 +75,7 @@ function renderMap(selectedRegion){
     layerGroup.addLayer(geoJsonDataLayer);
 
     let mapCenter = L.latLng({lat: center[0], lng: center[1]});
+    map.setMinZoom(zoomLevel);
     map.setView(mapCenter, zoomLevel);
 }
 
